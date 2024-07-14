@@ -163,14 +163,18 @@ cython_debug/
 __pycache__
 
 # ignore files 
-!*.mat
-!*.pkl
-!*.rds
-!*.csv
-!*.svg
-!*.tiff
-!*.docx
-!*.pdf
-!*.pptx
+*.mat
+*.pkl
+*.rds
+*.csv
+*.svg
+*.tiff
+*.jpg
+*.png
+
+*.docx
+*.pdf
+*.pptx
 
 example_data/
+.vscode/
