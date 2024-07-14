@@ -131,8 +131,8 @@ fig2, ax = plt.subplots(1, 1)
 preds = model.predict(data)
 
 disp = ConfusionMatrixDisplay(
-    confusion_matrix=confusion_matrix(metadata["label"], metadata["pred_loo"]),
-    display_labels=["Unclear", "Clear"],
+    confusion_matrix=confusion_matrix(metadata["label"], metadata["pred_loo"], normalize='true'),
+    display_labels=["No slowing", "Slowing"],
 )
 
 disp.plot(
@@ -144,7 +144,7 @@ disp.plot(
     colorbar=False,
     im_kw={"alpha": 0.8},
 )
-ax.set_yticklabels(["Unclear", "Clear"], rotation=90)
+ax.set_yticklabels(["No slowing", "Slowing"], rotation=90)
 ax.set_ylabel("Visual label", rotation=90, fontsize=16)
 ax.set_xlabel("Classifier label", rotation=0, fontsize=16)
 fig2.savefig(

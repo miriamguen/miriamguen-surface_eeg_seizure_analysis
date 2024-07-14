@@ -118,7 +118,9 @@ fig2, ax = plt.subplots(1, 1)
 preds = model.predict(data)
 
 disp = ConfusionMatrixDisplay(
-    confusion_matrix=confusion_matrix(metadata["label"], metadata["pred_loo"]),
+    confusion_matrix=confusion_matrix(
+        metadata["label"], metadata["pred_loo"], normalize="true"
+    ),
     display_labels=["Unclear", "Clear"],
 )
 
