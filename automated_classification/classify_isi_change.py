@@ -29,7 +29,7 @@ MODEL_PARAMS = {
     "max_depth": 3,
     "n_estimators": 500,
     "random_state": 12,
-    "class_weights": {0: 0.15, 1: 0.85},  # use the class weights
+    "class_weights": {0: 0.1, 1: 0.8},  # use the class weights
     "n_jobs": -1,
 }
 
@@ -116,11 +116,11 @@ fig1 = plt.figure()
 shap.summary_plot(
     shap_values,
     data,
-    feature_names=data.columns,
+    feature_names=[x.replace("_", " ").capitalize() for x in data.columns],
     cmap="coolwarm",
     max_display=10,
 )
-fig1.suptitle("Top 10 feature contribution for SC classification")
+fig1.suptitle("Identifying ISI slowing - top 10 feature")
 fig1.savefig(
     FIG_PATH / f"{EXPERIMENT_NAME}_summary_plot.svg",
     bbox_inches="tight",
