@@ -137,7 +137,7 @@ disp = ConfusionMatrixDisplay(
 
 disp.plot(
     include_values=True,
-    cmap="coolwarm",
+    cmap="Blues",#"coolwarm",
     ax=ax,
     xticks_rotation="horizontal",
     values_format=None,
