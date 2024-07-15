@@ -120,7 +120,7 @@ shap.summary_plot(
     cmap="coolwarm",
     max_display=10,
 )
-fig1.suptitle("Identifying ISI slowing - top 10 feature")
+fig1.suptitle("ISI slowing top features")
 fig1.savefig(
     FIG_PATH / f"{EXPERIMENT_NAME}_summary_plot.svg",
     bbox_inches="tight",
@@ -131,13 +131,15 @@ fig2, ax = plt.subplots(1, 1)
 preds = model.predict(data)
 
 disp = ConfusionMatrixDisplay(
-    confusion_matrix=confusion_matrix(metadata["label"], metadata["pred_loo"], normalize='true'),
+    confusion_matrix=confusion_matrix(
+        metadata["label"], metadata["pred_loo"], normalize="true"
+    ),
     display_labels=["No slowing", "Slowing"],
 )
 
 disp.plot(
     include_values=True,
-    cmap="Blues",#"coolwarm",
+    cmap="Blues",  # "coolwarm",
     ax=ax,
     xticks_rotation="horizontal",
     values_format=None,

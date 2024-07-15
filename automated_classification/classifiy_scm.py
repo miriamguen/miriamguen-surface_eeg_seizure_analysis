@@ -107,7 +107,7 @@ shap.summary_plot(
     cmap="coolwarm",  # "Spectral_r",
     max_display=10,
 )
-fig1.suptitle("Identifying a clear transition - top 10 feature")
+fig1.suptitle("Clear transition features")
 fig1.savefig(
     FIG_PATH / f"{EXPERIMENT_NAME}_summary_plot.svg",
     bbox_inches="tight",
