@@ -15,6 +15,8 @@
 
    if the user is interested in labeling bifurcation morphology it is recommended to practice on the simulation data
    this is provided with the paper: ["A taxonomy of seizure dynamotypes"](https://doi.org/10.7554%2FeLife.55632) and can be downloaded [here](https://doi.org/10.7302/ejhy-5h41)
+   To run this code, install the 'viewprops' update for EEGLAB from [https://github.com/sccn/viewprops/tree/9db7a1119a1d3da1ac0847f3ce3026842843e8fa].
+   You can adjust the opening screen sizes by modifying lines 56 and 62.
 
    The information presented includes:
    ----TODO: add description
