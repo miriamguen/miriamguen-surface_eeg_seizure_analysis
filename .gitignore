@@ -175,6 +175,7 @@ __pycache__
 *.docx
 *.pdf
 *.pptx
+*.Rhistory
 
 *old/
 example_data/
