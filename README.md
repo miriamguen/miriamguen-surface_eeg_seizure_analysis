@@ -1,9 +1,9 @@
 # The following repository is comprised of the following code sections, intended to use in this order:
 ## 1. Preprocess_data based on matlab 2022 with eeglab 2022
    ### Run the main.m
-   a. loads the eeg data using the index tables and seizure onset/offset times in the format provided in example data
-   b. Applies the automated preprocessing pipeline
-   c. saves a file containing the seizure signals and a control segment from the same file with similar length.
+   * loads the eeg data using the index tables and seizure onset/offset times in the format provided in example data
+   * Applies the automated preprocessing pipeline
+   * saves a file containing the seizure signals and a control segment from the same file with similar length.
 
    This project is based on the data from the EPILEPSIAE surface database, described in this [publication](https://pubmed.ncbi.nlm.nih.gov/20863589/). 
 
