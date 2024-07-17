@@ -175,6 +175,7 @@ __pycache__
 *.docx
 *.pdf
 *.pptx
+
 *old/
 example_data/
 .vscode/
