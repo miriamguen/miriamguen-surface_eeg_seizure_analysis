@@ -133,7 +133,18 @@ disp.plot(
     colorbar=False,
     im_kw={"alpha": 0.8},
 )
-ax.set_yticklabels(["Unclear", "Clear"], rotation=90)
+
+# Define custom font properties for the matrix values
+font_properties = {"fontsize": 16}
+
+# Update the font properties of the text inside the confusion matrix
+for text in disp.text_.ravel():
+    text.set_fontsize(font_properties["fontsize"])
+
+
+ax.set_yticklabels(["Unclear", "Clear"], rotation=90, fontdict=font_properties)
+ax.set_xticklabels(["Unclear", "Clear"], fontdict=font_properties)
+
 ax.set_ylabel("Visual label", rotation=90, fontsize=16)
 ax.set_xlabel("Classifier label", rotation=0, fontsize=16)
 fig2.savefig(
@@ -141,5 +152,6 @@ fig2.savefig(
     bbox_inches="tight",
     transparent=True,
 )
+
 
 print("all done")

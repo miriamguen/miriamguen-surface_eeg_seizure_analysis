@@ -47,11 +47,16 @@ log_odds_SN_SubH <- log(bifurcation_proportions["SN/SubH"] / (1 - bifurcation_pr
 log_odds_SNIC <- log(bifurcation_proportions["SNIC"] / (1 - bifurcation_proportions["SNIC"]))
 log_odds_SupH <- log(bifurcation_proportions["SupH"] / (1 - bifurcation_proportions["SupH"]))
 
-# Set priors
+# Set bifurcation intercept priors
 priors <- c(
   set_prior(paste0("normal(", log_odds_SNIC, ", 1)"), class = "Intercept", dpar = "muSNIC"),
   set_prior(paste0("normal(", log_odds_SupH, ", 1)"), class = "Intercept", dpar = "muSupH")
 )
+
+validate_prior(b_formula,
+               family = b_fam,
+               prior = priors,
+               data = onset_labels,)
 
 # Fit the model
 mod <- brm(
@@ -77,7 +82,7 @@ summary(mod, waic = TRUE)
 pp_check(mod, type = "bars")
 
 # Define significant margin
-significant_margin <- 0.2
+significant_margin <- 0.1
 significant_abs_change <- min(bifurcation_proportions) * significant_margin
 rope_rang_diff <- c(-significant_abs_change, significant_abs_change)
 rope_rang_ratio <- c(1 / (1 + significant_margin), 1 + significant_margin)
@@ -98,7 +103,9 @@ nd <- expand.grid(
 
 nd$posterior <- rvar(posterior_epred(mod, newdata = nd, re_formula = NA))
 
-# Helper functions for Bayesian analysis
+# Helper functions for the analysis
+
+#NOTICE - this is not the formal bayes factor - it just serves as a sanity check
 bayes_factor <- function(rvar_diff, null) {
   set.seed(1)
   diff_samples <- draws_of(rvar_diff)
@@ -119,7 +126,7 @@ get_diff_row <- function(data, name, value.1, value.2) {
     summarise(
       parameter = paste(c(name, value.1, value.2), collapse = "_"),
       prob_change = prob[param == value.1] - prob[param == value.2],
-      describe_posterior(prob_change, centrality = 'map', test = metrics, null = 0, rope_range = rope_rang_diff, rope_ci = rope_ci),
+      describe_posterior(prob_change, centrality = c('map', 'median'), test = metrics, null = 0, rope_range = rope_rang_diff, rope_ci = rope_ci),
       bayes_factor(prob_change, 0)
     )
   return(row)
@@ -132,7 +139,7 @@ get_ratio_row <- function(data, name, value.1, value.2) {
     summarise(
       parameter = paste(c(name, value.1, value.2), collapse = "_"),
       ratio_change = prob[param == value.1] / prob[param == value.2],
-      describe_posterior(ratio_change, centrality = 'map', test = metrics, null = 1, rope_range = rope_rang_ratio, rope_ci = rope_ci),
+      describe_posterior(ratio_change, centrality = c('map', 'median'), test = metrics, null = 1, rope_range = rope_rang_ratio, rope_ci = rope_ci),
       bayes_factor(ratio_change, 1)
     )
   return(row)

@@ -146,9 +146,23 @@ disp.plot(
     colorbar=False,
     im_kw={"alpha": 0.8},
 )
+
+# Define custom font properties for the matrix values
+font_properties = {'fontsize': 16}
+
+# Update the font properties of the text inside the confusion matrix
+for text in disp.text_.ravel():
+    text.set_fontsize(font_properties['fontsize'])
+
+
+
 ax.set_yticklabels(["No slowing", "Slowing"], rotation=90)
-ax.set_ylabel("Visual label", rotation=90, fontsize=16)
-ax.set_xlabel("Classifier label", rotation=0, fontsize=16)
+ax.set_ylabel("Visual label", rotation=90, fontsize=20)
+ax.set_xlabel("Classifier label", rotation=0, fontsize=20)
+
+ax.set_xticklabels(["No slowing", "Slowing"], fontdict=font_properties)
+ax.set_yticklabels(["No slowing", "Slowing"], rotation=90, fontdict=font_properties)
+
 fig2.savefig(
     FIG_PATH / f"{EXPERIMENT_NAME}_confusion.svg",
     bbox_inches="tight",

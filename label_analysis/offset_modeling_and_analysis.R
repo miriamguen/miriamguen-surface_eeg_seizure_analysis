@@ -47,6 +47,12 @@ log_odds_FLC <- log(bifurcation_proportions["FLC"] / (1 - bifurcation_proportion
 # Set prior
 prior_intercept <- set_prior(paste0("normal(", log_odds_FLC, ", 1)"), class = "Intercept")
 
+
+validate_prior(b_formula,
+               prior = prior_intercept,
+               family = b_fam_bi,
+               data = offset_labels)
+
 # Fit the model
 mod <- brm(
   b_formula,
@@ -71,7 +77,7 @@ summary(mod, waic = TRUE)
 pp_check(mod, type = "bars")
 
 # Define significant margin and statistical analysis parameters
-significant_margin <- 0.2
+significant_margin <- 0.1
 significant_abs_change <- min(bifurcation_proportions) * significant_margin
 rope_rang_diff <- c(-significant_abs_change, significant_abs_change)
 rope_rang_ratio <- c(1 / (1 + significant_margin), 1 + significant_margin)
@@ -113,7 +119,7 @@ get_diff_row <- function(data, param, value.1, value.2) {
     summarise(
       parameter = paste(c(param, value.1, value.2), collapse = "_"),
       prob_change = prob[ind1] - prob[ind2],
-      describe_posterior(prob_change, centrality = 'map', test = metrics, null = 0, rope_range = rope_rang_diff, rope_ci = rope_ci),
+      describe_posterior(prob_change, centrality = c('map', 'median'), test = metrics, null = 0, rope_range = rope_rang_diff, rope_ci = rope_ci),
       bayes_factor(prob_change, 0)
     )
   return(row)
@@ -126,7 +132,7 @@ get_ratio_row <- function(data, param, value.1, value.2) {
     summarise(
       parameter = paste(c(param, value.1, value.2), collapse = "_"),
       ratio_change = prob[ind1] / prob[ind2],
-      describe_posterior(ratio_change, centrality = 'map', test = metrics, null = 1, rope_range = rope_rang_ratio, rope_ci = rope_ci),
+      describe_posterior(ratio_change, centrality = c('map', 'median'), test = metrics, null = 1, rope_range = rope_rang_ratio, rope_ci = rope_ci),
       bayes_factor(ratio_change, 1)
     )
   return(row)
