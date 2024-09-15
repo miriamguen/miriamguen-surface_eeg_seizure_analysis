@@ -1,4 +1,7 @@
 # The following repository is comprised of the following code sections, intended to be used in this order:
+
+## The analysis overview:
+The following figure presents the analysis flow in this project for more detail see ["link to publication"]
 ![image](https://github.com/miriamguen/miriamguen-surface_eeg_seizure_analysis/blob/main/figures/paper_figures/Figure%201%20-%20The%20project%20work%20flow.png)
 
 
@@ -19,11 +22,12 @@
 
    if the user is interested in labeling bifurcation morphology, it is recommended to practice on the simulation data
    this is provided with the paper ["A taxonomy of seizure dynamotypes"](https://doi.org/10.7554%2FeLife.55632) and can be downloaded [here](https://doi.org/10.7302/ejhy-5h41)
-   To run this code, install the 'viewprops' update for EEGLAB from [https://github.com/sccn/viewprops/tree/9db7a1119a1d3da1ac0847f3ce3026842843e8fa].
+   To run this code, install the 'viewprops' update for EEGLAB from this ["link"](https://github.com/sccn/viewprops/tree/9db7a1119a1d3da1ac0847f3ce3026842843e8fa).
    You can adjust the opening screen sizes by modifying lines 56 and 62.
 
-   The information presented includes:
-   ----TODO: add a description
+   ### The information presented includes:
+   
+   ![image](https://github.com/miriamguen/miriamguen-surface_eeg_seizure_analysis/blob/main/figures/paper_figures/Figure%202%20-%20Manual%20labeling%20interface.png)
 
 
 
@@ -34,6 +38,8 @@
    * Produce the label distribution plots and tables
    * Compare the labeler selection to automated measures extracted from the signal
    * Run the selection of a single component per seizure based on: TODO: add flow chart
+
+![image](https://github.com/miriamguen/miriamguen-surface_eeg_seizure_analysis/blob/main/figures/paper_figures/Figure%203%20-%20label%20proportions.png)
 
    ### Run the patient_metadata.py
    * get a printout of the clinical factors of the patients in the data
@@ -55,3 +61,4 @@ These scripts will save the model, inference result tables, and plots in the "ex
    * Save performance metrics, including balanced accuracy, ROC-AUC, and Cohen's Kappa
    * Train a full model for feature contribution analysis and run [SHAP analysis](https://shap.readthedocs.io/en/latest/) on the model to examine the feature contribution to the classification decision.
 '
+![image](https://github.com/miriamguen/miriamguen-surface_eeg_seizure_analysis/blob/main/figures/paper_figures/Figure%204%20-%20classification%20analysis.png)
