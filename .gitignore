@@ -170,7 +170,7 @@ __pycache__
 *.svg
 *.tiff
 *.jpg
-*.png
+#*.png
 
 *.docx
 *.pdf
@@ -181,3 +181,4 @@ __pycache__
 example_data/
 .vscode/
 text/
+paper figures/

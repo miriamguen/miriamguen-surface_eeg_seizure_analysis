@@ -1,5 +1,5 @@
 # The following repository is comprised of the following code sections, intended to be used in this order:
-![image](files: "paper figures/Figure 1 - The project work flow.svg")
+![image](files: "figures/paper_figures/the_project_work_flow.png")
 
 
 
