@@ -1,5 +1,5 @@
 # The following repository is comprised of the following code sections, intended to be used in this order:
-![image](files: "figures/paper_figures/the_project_work_flow.png")
+![image](https://github.com/miriamguen/miriamguen-surface_eeg_seizure_analysis/blob/main/figures/paper_figures/Figure%201%20-%20The%20project%20work%20flow.png)
 
 
 
