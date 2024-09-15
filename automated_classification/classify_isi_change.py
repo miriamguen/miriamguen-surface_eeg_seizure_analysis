@@ -29,7 +29,7 @@ MODEL_PARAMS = {
     "max_depth": 3,
     "n_estimators": 500,
     "random_state": 12,
-    "class_weights": {0: 0.1, 1: 0.8},  # use the class weights
+    "class_weights": {0: 0.1, 1: 0.7},  # use the class weights
     "n_jobs": -1,
 }
 
@@ -64,8 +64,8 @@ print(
 print("stop")
 # pre_process data
 data, metadata, processing_info = prepare_data(raw_data, None)
-
-
+# data = data[filter(lambda x: 'isi' in x, data.columns.values)]
+# print(data.shape[1], " columns with ISI")
 # %% run the leave one out cross validation
 metadata, train_results_all, test_results_all, overall_test_performance = (
     loo_training_and_validation(data, metadata, MODEL_PARAMS)

@@ -1,5 +1,9 @@
 # The following repository is comprised of the following code sections, intended to be used in this order:
-## 1. Preprocess_data based on Matlab 2022a with EEGLAB 2022
+![image](files: "paper figures/Figure 1 - The project work flow.svg")
+
+
+
+## 1. preprocess_data based on Matlab 2022a with EEGLAB 2022
    ### Run the main.m
    * loads the EEG data using the index tables and seizure onset/offset times in the format provided in the example data
    * Applies the automated preprocessing pipeline
@@ -7,7 +11,7 @@
 
    This project is based on data from the EPILEPSIAE surface database described in this [publication](https://pubmed.ncbi.nlm.nih.gov/20863589/). 
 
-## 2. Visual_analysis
+## 2. visual_analysis
    ### Run the label_all.m
    This file sequentially loads the files saved in the previous step and provides a visual graphical user interface to label the data.
    Before using this step on new data, it is recommended that the rater practices and understands the ICA representations provided
@@ -23,7 +27,7 @@
 
 
 
-## 3. Label Analysis
+## 3. label_analysis
    ### Run the label_validation_analysis.py (tested up to Python 3.12)
    * Analyze detectability rates based on the lobe containing the epileptogenic zone and seizure classification.
    * Run the inter-rater agreement analysis
@@ -31,6 +35,8 @@
    * Compare the labeler selection to automated measures extracted from the signal
    * Run the selection of a single component per seizure based on: TODO: add flow chart
 
+   ### Run the patient_metadata.py
+   * get a printout of the clinical factors of the patients in the data
 
    ### Bayesian modeling of clinical factors, use: (tested up to R 4.4 + [brms 2.21.0](https://paul-buerkner.github.io/brms/) + cmdstanr 2.35.0) 
    * "onset_modeling_and_analysis.R" to fit the model and run inference analysis with the onset labels

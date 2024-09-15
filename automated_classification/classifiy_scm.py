@@ -29,7 +29,7 @@ MODEL_PARAMS = {
     "max_depth": 3,
     "n_estimators": 500,
     "random_state": 12,
-    "class_weights": {0: 0.1, 1: 0.6},  # use the class weights
+    "class_weights": {0: 0.1, 1: 0.64},  # use the class weights
     "n_jobs": -1,
 }
 
@@ -115,7 +115,6 @@ fig1.savefig(
 )
 
 fig2, ax = plt.subplots(1, 1)
-preds = model.predict(data)
 
 disp = ConfusionMatrixDisplay(
     confusion_matrix=confusion_matrix(

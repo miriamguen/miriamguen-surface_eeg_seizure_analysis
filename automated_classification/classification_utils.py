@@ -55,10 +55,10 @@ def prepare_data(data, keep_n=None):
     data = data.assign(
         patient=data.file_name.apply(lambda x: "_".join(x.split("_")[0:3])).values
     )
-    metadata = data[["patient", "label"]]
+    metadata = data[["patient", "label", "bif_time", "onset_offset"]]
+    data["detacted_change_point"] = np.sign(data["bif_time"].values)
     data["bif_time"] = data.groupby("file_name", group_keys=False)[["bif_time"]].apply(
-        mean_bif_time
-    )
+        mean_bif_time)
 
     data = data.drop(columns=["file_name", "comp_num", "patient", "label"])
 
@@ -68,14 +68,17 @@ def prepare_data(data, keep_n=None):
 
     data = data.loc[:, keep_columns]
 
-    # drop rows with over 10% nan values
-    drop_rows = data.isna().sum(axis=1) > (len(data.columns) / 10)
+    # # drop rows with over 5% nan values # The model shoud deal with nall values
+    # drop_rows = data.isna().sum(axis=1) > (len(data.columns) / 20)
 
-    processing_info["drop_rows"] = drop_rows.sum()
-    print(f"Dropping {drop_rows.sum()} data rows due to noisy data")
+    # processing_info["drop_rows"] = drop_rows.sum()
+    # print(f"Dropping {drop_rows.sum()} data rows due to noisy data")
+    # data = data[~drop_rows].reset_index()
+    # metadata = metadata[~drop_rows].reset_index()
+    
+    data = data.reset_index()
+    metadata = metadata.reset_index()
 
-    data = data[~drop_rows].reset_index()
-    metadata = metadata[~drop_rows].reset_index()
     processing_info["feature_columns_names"] = data.columns
     print(
         f"feature matrix contains {len(data)} examples, out of them {metadata.label.sum()} are labeled as a clear transition"
@@ -91,11 +94,13 @@ def prepare_data(data, keep_n=None):
         data = data.drop(columns=["index"])
 
     if keep_n is None:
+        keep_columns = data.columns.values
+    else:
         keep_n = len(data.columns)
-    # select the top  keep_n features for a cleaner model
-    selector = SelectKBest(f_classif, k=keep_n).fit(data, metadata.label)
-    keep_columns = selector.get_feature_names_out()
-    data = data[keep_columns]
+        # select the top  keep_n features for a cleaner model
+        selector = SelectKBest(f_classif, k=keep_n).fit(data, metadata.label)
+        keep_columns = selector.get_feature_names_out()
+        data = data[keep_columns]
 
     print(f"Keeping {len(keep_columns)} feature columns for task")
     processing_info["feature_columns"] = len(keep_columns)
