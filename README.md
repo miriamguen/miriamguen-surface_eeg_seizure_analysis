@@ -1,12 +1,10 @@
 
-### Please cite
-The following code has been developed under the research project described in this ["publication"](https://www.biorxiv.org/content/10.1101/2023.04.02.535246v1), if you adapt ore use this code base please make sure you cite us
-
-
 # The following repository is comprised of the following code sections, intended to be used in this order:
 
 ## The analysis overview:
-The following figure presents the analysis flow in this project for more detail, see ["link to publication"]
+The following figure presents the analysis flow in this project for more detail; see ["link to publication"](https://www.biorxiv.org/content/10.1101/2023.04.02.535246v1) #TODO: UPDATE
+if you adapt or use this code base, please make sure you cite us
+
 ![image](https://github.com/miriamguen/miriamguen-surface_eeg_seizure_analysis/blob/main/figures/paper_figures/Figure%201%20-%20The%20project%20work%20flow.png)
 
 
